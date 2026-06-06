@@ -1,0 +1,98 @@
+{
+  "tests": [
+    {
+      "name": "API root",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": { "status": "AIS TechService API v2.0" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "GET categories",
+      "method": "GET",
+      "path": "/?entity=categories",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET users",
+      "method": "GET",
+      "path": "/?entity=users",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET masters",
+      "method": "GET",
+      "path": "/?entity=masters",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET devices",
+      "method": "GET",
+      "path": "/?entity=devices",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET statuses",
+      "method": "GET",
+      "path": "/?entity=statuses",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET services",
+      "method": "GET",
+      "path": "/?entity=services",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET parts",
+      "method": "GET",
+      "path": "/?entity=parts",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET orders",
+      "method": "GET",
+      "path": "/?entity=orders",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET payments",
+      "method": "GET",
+      "path": "/?entity=payments",
+      "expectedStatus": 200,
+      "expectedBody": { "stats": {} },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "GET schedule",
+      "method": "GET",
+      "path": "/?entity=schedule",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET notifications",
+      "method": "GET",
+      "path": "/?entity=notifications",
+      "expectedStatus": 200,
+      "bodyMatcher": "array"
+    },
+    {
+      "name": "GET analytics",
+      "method": "GET",
+      "path": "/?entity=analytics",
+      "expectedStatus": 200,
+      "expectedBody": { "kpi": {} },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
