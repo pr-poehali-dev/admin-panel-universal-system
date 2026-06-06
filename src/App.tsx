@@ -1,28 +1,40 @@
+import { Toaster } from '@/components/ui/toaster';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import AdminLayout from '@/components/admin/AdminLayout';
+import LoginPage from '@/pages/LoginPage';
+import Icon from '@/components/ui/icon';
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+function AppContent() {
+  const { user, isLoading } = useAuth();
 
-const queryClient = new QueryClient();
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 rounded-xl border border-neon-cyan/40 bg-neon-cyan/10 flex items-center justify-center animate-glow">
+            <Icon name="Cpu" size={24} className="text-neon-cyan" />
+          </div>
+          <div className="flex items-center gap-2">
+            <Icon name="Loader2" size={16} className="text-neon-cyan animate-spin" />
+            <span className="font-mono text-sm text-muted-foreground tracking-widest">ЗАГРУЗКА СИСТЕМЫ...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
+  if (!user) return <LoginPage />;
+  return <AdminLayout />;
+}
+
+export default function App() {
+  return (
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <AppContent />
+        <Toaster />
+      </AuthProvider>
     </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+  );
+}
